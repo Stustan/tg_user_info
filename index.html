@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Profile Viewer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <h2>Профиль пользователя</h2>
+            <div class="profile-info">
+                <p>ID: <span id="userId">-</span></p>
+                <p>Username: <span id="username">-</span></p>
+                <p>Премиум: <span id="isPremium">-</span></p>
+                <p>Дата авторизации: <span id="authDate">-</span></p>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <h2>Галерея фотографий</h2>
+            <div id="photoGallery" class="photo-gallery">
+                <!-- Photos will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
