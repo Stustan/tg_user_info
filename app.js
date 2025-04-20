@@ -13,11 +13,13 @@ if (user) {
     // Update profile information
     document.getElementById('userId').textContent = user.id || 'Недоступно';
     document.getElementById('username').textContent = user.username || 'Недоступно';
-    document.getElementById('isPremium').textContent = user.isPremium ? 'Да' : 'Нет';
     
-    // Format and display auth date
-    const authDate = new Date(tg.initDataUnsafe.auth_date * 1000);
-    document.getElementById('authDate').textContent = authDate.toLocaleString();
+    // Correctly handle premium status
+    const isPremiumStatus = user.is_premium === true ? 'Да' : 'Нет';
+    document.getElementById('isPremium').textContent = isPremiumStatus;
+    
+    // Add birth date (will be "Недоступно" as it's not available in Telegram Mini Apps)
+    document.getElementById('birthDate').textContent = 'Недоступно';
 }
 
 // Function to add a photo to the gallery
