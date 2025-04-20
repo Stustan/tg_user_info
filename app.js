@@ -9,8 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the WebApp
     tg.ready();
 
-    // Get user data
+    // Get user data and log it for debugging
     const user = tg.initDataUnsafe.user;
+    console.log('Full user object:', user); // Debug log for user object
+
     try {
         if (user) {
             // Update profile information
@@ -22,20 +24,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userIdElement) userIdElement.textContent = user.id || 'Недоступно';
             if (usernameElement) usernameElement.textContent = user.username || 'Недоступно';
             
-            // Correctly handle premium status with proper type checking
+            // Correctly handle premium status with proper type checking and debugging
             if (isPremiumElement) {
-                console.log('Premium status:', user.is_premium); // Debug log
-                isPremiumElement.textContent = user.is_premium ? 'Да' : 'Нет';
+                const premiumStatus = Boolean(user.premium || user.is_premium);
+                console.log('Premium status details:', {
+                    raw_premium: user.premium,
+                    raw_is_premium: user.is_premium,
+                    computed_status: premiumStatus
+                });
+                isPremiumElement.textContent = premiumStatus ? 'Да' : 'Нет';
             }
             
-            // Handle birth date
+            // Handle birth date (not available in Telegram Mini Apps)
             if (birthDateElement) {
-                try {
-                    birthDateElement.textContent = 'Недоступно';
-                } catch (error) {
-                    console.error('Error setting birth date:', error);
-                    birthDateElement.textContent = 'Недоступно';
-                }
+                birthDateElement.textContent = 'Недоступно';
+                console.log('Birth date is not available through Telegram Mini Apps API');
             }
         } else {
             console.warn('User data is not available');
@@ -91,11 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
     tg.expand();
 });
 
-// Log initialization data for debugging
-console.log('Telegram WebApp Data:', {
+// Log complete initialization data for debugging
+console.log('Complete Telegram WebApp Data:', {
     initData: tg.initData,
     initDataUnsafe: tg.initDataUnsafe,
     version: tg.version,
     platform: tg.platform,
-    colorScheme: tg.colorScheme
+    colorScheme: tg.colorScheme,
+    themeParams: tg.themeParams
 }); 
